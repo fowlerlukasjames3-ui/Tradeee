@@ -1,0 +1,55 @@
+wait ("0.2")
+--// Button Container
+local ButtonContainer = Instance.new("Frame")
+ButtonContainer.Size = UDim2.new(1, 0, 0, 100)
+ButtonContainer.Position = UDim2.new(0, 0, 0, 135)
+ButtonContainer.BackgroundTransparency = 1
+ButtonContainer.Parent = ContentFrame
+
+local layout = Instance.new("UIListLayout", ButtonContainer)
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+layout.Padding = UDim.new(0, 6)
+layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+layout.VerticalAlignment = Enum.VerticalAlignment.Top
+
+local function createButton(text, color)
+	local btn = Instance.new("TextButton")
+	btn.Size = UDim2.new(0.85, 0, 0, 30)
+	btn.Text = text
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 13
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.BackgroundColor3 = color
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 8)
+	btn.Parent = ButtonContainer
+	return btn
+end
+
+local FreezeButton = createButton("FREEZE TRADE", Color3.fromRGB(240, 180, 60))
+local ForceButton = createButton("FORCE TRADE PETS", Color3.fromRGB(160, 120, 255))
+local AcceptButton = createButton("AUTO ACCEPT", Color3.fromRGB(70, 200, 120))
+
+-- Notification Logic
+local function notify(txt)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = "Trade Assist",
+		Text = txt,
+		Duration = 2,
+	})
+end
+
+FreezeButton.MouseButton1Click:Connect(function() notify("Trade frozen!") end)
+ForceButton.MouseButton1Click:Connect(function() notify("Force trade triggered!") end)
+AcceptButton.MouseButton1Click:Connect(function() notify("Auto accept triggered!") end)
+
+--// Credit
+local CreditLabel = Instance.new("TextLabel")
+CreditLabel.Text = "Tiktok: @Alex.scripter0"
+CreditLabel.Font = Enum.Font.GothamBold
+CreditLabel.TextSize = 13
+CreditLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+CreditLabel.BackgroundTransparency = 1
+CreditLabel.Size = UDim2.new(1, 0, 0, 20)
+CreditLabel.Position = UDim2.new(0, 0, 1, -22)
+CreditLabel.TextXAlignment = Enum.TextXAlignment.Center
+CreditLabel.Parent = MainFrame
